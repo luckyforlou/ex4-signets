@@ -4,10 +4,20 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useState } from 'react';
+import { useState} from 'react';
 import { TwitterPicker } from 'react-color';
+import { green, red } from '@material-ui/core/colors';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
+  const classes = useStyles();
+
   const [nom, setNom] = useState('');
   const [couverture, setCouverture] = useState('');
   const [couleur, setCouleur] = useState('#537169');
@@ -17,6 +27,29 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
     setCouverture('');
     setCouleur('#537169');
   }
+
+  const RougeButton = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(red[700]),
+      backgroundColor: red[700],
+      '&:hover': {
+        backgroundColor: red[900],
+      },
+    },
+  }))(Button);
+
+  
+
+  const VertButton = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(green[700]),
+      backgroundColor: green[700],
+      '&:hover': {
+        backgroundColor: green[900],
+      },
+    },
+  }))(Button);
+
 
   return (
     <div className="AjouterDossier">
@@ -51,12 +84,12 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>{setOuvert(false); viderChamps()}} color="primary">
+          <RougeButton className={classes.button} onClick={()=>{setOuvert(false); viderChamps()}} color="primary">
             Annuler
-          </Button>
-          <Button onClick={() => {nom !== '' && gererAjout(nom, couverture, couleur); viderChamps(); }} color="primary">
+          </RougeButton>
+          <VertButton className={classes.button} onClick={() => {nom !== '' && gererAjout(nom, couverture, couleur); viderChamps(); }} color="primary">
             Ajouter
-          </Button>
+          </VertButton>
         </DialogActions>
       </Dialog>
     </div>

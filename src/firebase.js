@@ -6,6 +6,7 @@ import 'firebase/firestore';
 const firebaseConfig = {
   apiKey: "AIzaSyA13gQqxNEQ3Fwck3y4U11RuKEMrdHQ8a4",
   authDomain: "utilisateurs-ex4.firebaseapp.com",
+  databaseURL: "https://utilisateurs-ex4-default-rtdb.firebaseio.com",
   projectId: "utilisateurs-ex4",
   storageBucket: "utilisateurs-ex4.appspot.com",
   messagingSenderId: "111000932832",
