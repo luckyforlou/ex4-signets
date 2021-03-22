@@ -10,7 +10,13 @@ import { TwitterPicker } from 'react-color';
 export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
   const [nom, setNom] = useState('');
   const [couverture, setCouverture] = useState('');
-  const [couleur, setCouleur] = useState('#900');
+  const [couleur, setCouleur] = useState('#537169');
+
+  function viderChamps() {
+    setNom('');
+    setCouverture('');
+    setCouleur('#537169');
+  }
 
   return (
     <div className="AjouterDossier">
@@ -25,6 +31,7 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             type="text"
             fullWidth
             onChange={(e) => setNom(e.target.value)}
+            defaultValue={nom}
           />
           <TextField
             margin="dense"
@@ -33,18 +40,21 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             type="text"
             fullWidth
             onChange={(e) => setCouverture(e.target.value)}
+            defaultValue={couverture}
           />
           <TwitterPicker 
+           colors={['#F94144', '#f8961e','#f9c74f','#90be6d','#277da1','#7B3CAB',]}
             width="100%" 
             triangle="hide" 
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
+            color={couleur}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setOuvert(false)} color="primary">
+          <Button onClick={()=>{setOuvert(false); viderChamps()}} color="primary">
             Annuler
           </Button>
-          <Button onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} color="primary">
+          <Button onClick={() => {nom !== '' && gererAjout(nom, couverture, couleur); viderChamps(); }} color="primary">
             Ajouter
           </Button>
         </DialogActions>
